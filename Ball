@@ -1,0 +1,65 @@
+package jrJava.bouncyBall;
+
+import java.awt.Color;
+
+import java.awt.Graphics2D;
+
+import resources.*;
+
+public class Ball {
+
+	int x =200;
+	int y =270;
+	int xSpeed = 3;
+	int ySpeed = -3;
+	int radius = 80;
+	Color color = Color.blue;
+	
+	SoundPlayer legendary;
+	
+	
+	
+	
+	Ball(){
+		legendary = new SoundPlayer();
+		legendary.load("soundDepot/Boing.wav");
+		
+	}	
+	
+	
+
+	
+                
+	Ball(int theXSpeed, int theYSpeed, Color theColor){
+		xSpeed = theXSpeed;
+		ySpeed= theYSpeed;
+		color = theColor;
+		
+		legendary = new SoundPlayer();
+		legendary.load("soundDepot/Boing.wav");
+	}
+	
+	
+	
+	void move(){
+		x = x + xSpeed;
+		y = y + ySpeed;
+		
+		
+		if(x<=0+radius || x>=700-radius){
+			xSpeed = -xSpeed;
+			legendary.play();
+		}
+		if(y<=0+radius || y>=500-radius){
+			ySpeed = -ySpeed;
+			legendary.play();
+		}
+	}
+	
+	
+	void draw(DrawingBoard board){
+		Graphics2D canvas = board.getCanvas();
+		canvas.setColor(color);
+		canvas.fillOval(x-radius,  y-radius,  2*radius,  2*radius);
+	}
+}
